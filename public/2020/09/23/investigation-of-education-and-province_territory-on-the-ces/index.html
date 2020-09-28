@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.75.1" />
+
+
+<title>Investigation of education and province_territory on the CES - A Hugo website</title>
+<meta property="og:title" content="Investigation of education and province_territory on the CES - A Hugo website">
+
+
+  <link href='../../../../favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="../../../../css/fonts.css" media="all">
+<link rel="stylesheet" href="../../../../css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="../../../../" class="nav-logo">
+    <img src="../../../../images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="../../../../about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Investigation of education and province_territory on the CES</h1>
+
+    
+    <span class="article-date">2020-09-23</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="abstract" class="section level1">
+<h1>Abstract</h1>
+<p>Here we investigate how education and province_territory affect the election and find that Ontario province is highly associated with the election; in addition, people with Bachelor’s degree are highly associated with the election.</p>
+</div>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The major task of this paper is to see how education and province_territory affect the election via looking the distributions of the two variables.</p>
+<p>Since both of them are categorical variables, we look at the distributions of them via bar charts. in addition, the weakness and further works are followed in the discussion part.</p>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>The data used come from the 2019 Canadian Election Study online survey and it contains 37882 observations and 22 variables. For the need of our study, we only care about the variables education and province_territory, which are both categorical variables.</p>
+<p>We first see the distribution of province_territory and find that Ontario province is highly associated with the election and takes the largest proportion of all the regions.</p>
+<pre class="r"><code>
+decon &lt;- 
+  decon%&gt;%
+  select(education,province_territory)
+
+decon%&gt;%
+  ggplot(aes(x=province_territory))+
+  geom_bar()</code></pre>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>
+table(decon$province_territory)
+## 
+##                   Alberta          British Columbia                  Manitoba 
+##                      4481                      4354                      1691 
+##             New Brunswick Newfoundland and Labrador     Northwest Territories 
+##                       858                       633                        25 
+##               Nova Scotia                   Nunavut                   Ontario 
+##                      1001                        26                     14808 
+##      Prince Edward Island                    Quebec              Saskatchewan 
+##                       168                      8399                      1340 
+##                     Yukon 
+##                        38</code></pre>
+<p>We then give the distribution of education and find that people with Bachelor’s degreee are highly associated with the election since they take the largest proportion of all the people.</p>
+<pre class="r"><code>decon%&gt;%
+  ggplot(aes(x=education))+
+  geom_bar()</code></pre>
+<p><img src="../../../../post/2015-07-23-r-rmarkdown_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>table(decon$education)
+## 
+##                                                     No schooling 
+##                                                               48 
+##                                           Some elementary school 
+##                                                               87 
+##                                      Completed elementary school 
+##                                                              288 
+##                                      Some secondary/ high school 
+##                                                             1649 
+##                                 Completed secondary/ high school 
+##                                                             5865 
+##      Some technical, community college, CEGEP, College Classique 
+##                                                             4394 
+## Completed technical, community college, CEGEP, College Classique 
+##                                                             7702 
+##                                                  Some university 
+##                                                             3716 
+##                                                Bachelor&#39;s degree 
+##                                                             9192 
+##                                                  Master&#39;s degree 
+##                                                             3207 
+##                                 Professional degree or doctorate 
+##                                                             1575 
+##                                 Don&#39;t know/ Prefer not to answer 
+##                                                               99</code></pre>
+</div>
+<div id="discussion" class="section level1">
+<h1>Discussion</h1>
+<div id="weakness-and-next-steps" class="section level2">
+<h2>weakness and next steps</h2>
+<p>A major weakness of the data is that it comes from the online survey and the non-response bias may exist. For further studies, they may find ways to reduce the effects of non-response bias.</p>
+</div>
+</div>
+<div id="reference" class="section level1">
+<h1>Reference</h1>
+<ul>
+<li><p>Paul A. Hodgetts and Rohan Alexander (2020). cesR: Access the CES Datasets a Little
+Easier.. R package version 0.1.0.</p></li>
+<li><p>Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software,
+4(43), 1686, <a href="https://doi.org/10.21105/joss.01686" class="uri">https://doi.org/10.21105/joss.01686</a></p></li>
+</ul>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="../../../../index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="../../../../images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="../../../../js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

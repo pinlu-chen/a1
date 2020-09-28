@@ -1,0 +1,84 @@
+---
+title: "Investigation of education and province_territory on the CES"
+author: "Pinlu Chen"
+date: 2020-09-23T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE)
+#install.packages("devtools")
+#devtools::install_github("hodgettsp/cesR")
+library(tidyverse)
+cesR::get_decon()
+
+```
+
+# Abstract
+
+Here we investigate how education and province_territory  affect the election and find that Ontario province is highly associated with the election; in addition, people with Bachelor's degree are highly associated with the election. 
+
+# Introduction
+
+The major task of this paper is to see how education and province_territory  affect the election via looking the distributions of the two variables.
+
+Since both of them are categorical variables, we look at the distributions of them via bar charts. in addition, the weakness and further works are followed in the discussion part.
+
+# Data
+
+The data used come from the 2019 Canadian Election Study online survey and it contains 37882 observations and 22 variables. For the need of our study, we only care about the variables education and province_territory, which are both categorical variables. 
+
+We first see the distribution of province_territory and find that Ontario province is highly associated with the election and takes the largest proportion of all the regions.
+
+```{r}
+
+decon <- 
+  decon%>%
+  select(education,province_territory)
+
+decon%>%
+  ggplot(aes(x=province_territory))+
+  geom_bar()
+
+table(decon$province_territory)
+```
+
+We then give the distribution of education and find that people with Bachelor's degreee are highly associated with the election since they take the largest proportion of all the people.
+
+```{r }
+decon%>%
+  ggplot(aes(x=education))+
+  geom_bar()
+table(decon$education)
+
+```
+
+
+
+# Discussion
+
+## weakness and next steps
+
+
+A major weakness of the data is that it comes from the online survey and the non-response bias may exist. For further studies, they may find ways to reduce the effects of non-response bias.
+
+
+
+
+# Reference
+
+- Paul A. Hodgetts and Rohan Alexander (2020). cesR: Access the CES Datasets a Little
+Easier.. R package version 0.1.0.
+
+
+- Wickham et al., (2019). Welcome to the tidyverse. Journal of Open Source Software,
+4(43), 1686, https://doi.org/10.21105/joss.01686
+
+
+
+
+
+
+
+
